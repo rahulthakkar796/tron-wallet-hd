@@ -3,13 +3,13 @@
 ### Installation
 
 ```shell
-npm install tron-hd-wallet
+npm install tron-wallet-hd
 ```
 
 ### Usage
 
 ```node
-const hdWallet = require('tron-hd-wallet');
+const hdWallet = require('tron-wallet-hd');
 ```
 
 ### Methods
