@@ -1,4 +1,4 @@
-# tron-hd-wallet
+# tron-wallet-hd
 ##### Tron HD wallet to generate offline private keys, mnemonic seeds and addresses.
 ### Installation
 
