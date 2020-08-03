@@ -1,0 +1,43 @@
+{
+  "name": "tron-wallet-hd",
+  "version": "1.0.0",
+  "description": "Tron HD wallet to generate offline private keys, mnemonic seeds and addresses.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Rahul Buddhdev",
+  "license": "ISC",
+  "dependencies": {
+    "@tronscan/client": "^0.2.48",
+    "aes-js": "^3.1.2",
+    "bcrypt": "^4.0.1",
+    "bip32": "^1.0.2",
+    "bip39": "^2.5.0",
+    "core-js": "^3.4.3",
+    "crypto": "^1.0.1",
+    "crypto-js": "^4.0.0",
+    "pbkdf2": "^3.0.17",
+    "tronweb": "^2.10.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rahulthakkar796/tron-wallet-hd"
+  },
+  "keywords": [
+    "blockchain",
+    "tron",
+    "smartcontract",
+    "hd wallet",
+    "wallet",
+    "tron hd wallet",
+    "tron wallet hd",
+    "tron hd",
+    "solidity",
+    "trx wallet",
+    "trx hd wallet",
+    "trx wallet hd",
+    "smart contract"
+  ],
+  "homepage": "https://github.com/rahulthakkar796/tron-wallet-hd"
+}
