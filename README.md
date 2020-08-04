@@ -8,7 +8,7 @@ npm install tron-wallet-hd
 
 ### Usage
 
-```node
+```js
 const hdWallet = require('tron-wallet-hd');
 ```
 
@@ -16,13 +16,13 @@ const hdWallet = require('tron-wallet-hd');
 
 **generateMnemonic() :  Generates a string consisting of a random 12-word seed and returns it.**
 
-```node
+```js
 const seed = hdWallet.generateMnemonic();
 ```
 
 **validateMnemonic(mnemonic) :  Checks if seed is a valid 12-word seed according to the <a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki" traget="_blank">BIP39</a> specification and returns a boolean value.**
 
-```node
+```js
 const seed = "hello"
 const isValidSeed = hdWallet.validateMnemonic(seed);
 console.log(isValidSeed) //false
@@ -36,7 +36,7 @@ console.log(isValidSeed) //false
  * index (optional):Number of accounts to generate, Default value is 5.
 
 
-```node
+```js
 const seed = hdWallet.generateMnemonic();
 const accounts = await hdWallet.generateAccountsWithMnemonic(seed,2);
 ```
@@ -45,26 +45,26 @@ const accounts = await hdWallet.generateAccountsWithMnemonic(seed,2);
 * mnemonic: mnemonic seed to get the key-value pair.
 * index: index value at which key-value pair is stored. Default value is 0.
 
-```node
+```js
 const seed = "your mnemonic seed;
 const account = await hdWallet.getAccountAtIndex(seed,1);
 ```
 
 **validatePrivateKey(privateKey) : Validates the given private key and returns a boolean value.**
 
-```node
+```js
 const pk= "your private key";
 const isValidPK = hdWallet.validatePrivateKey(pk);
 ```
 **getAccountFromPrivateKey(privateKey) : Validates the given private key and returns tron address associated with the given private key. it's an asynchronous method.**
 
-```node
+```js
 const pk= "your private key";
 const address = await getAccountFromPrivateKey(pk);
 ```
 
 **validateAddress(address) : Validates the given tron address and returns a boolean value. Supports both base58 and hex format.**
-```node
+```js
 const isValidAddress1 = hdWallet.validateAddress("41c7cfb121ffac3fbf8c4dd48e17b055cae2ed1314");
 console.log(isValidAddress1) //true
 

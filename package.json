@@ -22,7 +22,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/rahulthakkar796/tron-wallet-hd"
+    "url": "https://github.com/KYCCrypto/tron-wallet-hd"
   },
   "keywords": [
     "blockchain",
@@ -39,5 +39,5 @@
     "trx wallet hd",
     "smart contract"
   ],
-  "homepage": "https://github.com/rahulthakkar796/tron-wallet-hd"
+  "homepage": "https://github.com/KYCCrypto/tron-wallet-hd"
 }
