@@ -16,7 +16,7 @@ keyStore.createVault({
   // seedPhrase: seedPhrase, // Optionally provide a 12-word seed phrase
   // salt: fixture.salt,     // Optionally provide a salt.
                              // A unique salt will be generated otherwise.
-  // hdPathString: hdPath    // Optional custom HD Path String
+  
 }, function (err, ks) {
 
   // Some methods will require providing the `pwDerivedKey`,
@@ -104,27 +104,30 @@ Given the pwDerivedKey, decrypts and returns the users 12-word seed.
 
 ### `keystore.exportPrivateKey(address, pwDerivedKey)`
 
-Given the derived key, decrypts and returns the private key corresponding to `address`. This should be done sparingly as the recommended practice is for the `keystore` to sign transactions using `signing.signTx`, so there is normally no need to export private keys.
+Given the derived key, decrypts and returns the private key corresponding to `address`.
+
+<br>
+<hr>
 
 ## `utils` Function definitions
 ### Usage
 
 ```js
 const hdWallet = require('tron-wallet-hd');
-const utilits=hdWallet.utils;
+const utils=hdWallet.utils;
 ```
 
 **generateMnemonic() :  Generates a string consisting of a random 12-word seed and returns it.**
 
 ```js
-const seed = hdWallet.generateMnemonic();
+const seed = utils.generateMnemonic();
 ```
 
 **validateMnemonic(mnemonic) :  Checks if seed is a valid 12-word seed according to the <a href="https://github.com/bitcoin/bips/blob/master/bip-0039.mediawiki" traget="_blank">BIP39</a> specification and returns a boolean value.**
 
 ```js
 const seed = "hello"
-const isValidSeed = hdWallet.validateMnemonic(seed);
+const isValidSeed = utils.validateMnemonic(seed);
 console.log(isValidSeed) //false
 ```
 
@@ -137,8 +140,8 @@ console.log(isValidSeed) //false
 
 
 ```js
-const seed = hdWallet.generateMnemonic();
-const accounts = await hdWallet.generateAccountsWithMnemonic(seed,2);
+const seed = utils.generateMnemonic();
+const accounts = await utils.generateAccountsWithMnemonic(seed,2);
 ```
 
 **getAccountAtIndex(mnemonic,index) : Returns public and private key-value pair stored at the specified index using the given mnemonic seed,  it's an asynchronous method.**
@@ -146,15 +149,15 @@ const accounts = await hdWallet.generateAccountsWithMnemonic(seed,2);
 * index: index value at which key-value pair is stored. Default value is 0.
 
 ```js
-const seed = "your mnemonic seed;
-const account = await hdWallet.getAccountAtIndex(seed,1);
+const seed = "your mnemonic seed";
+const account = await utils.getAccountAtIndex(seed,1);
 ```
 
 **validatePrivateKey(privateKey) : Validates the given private key and returns a boolean value.**
 
 ```js
 const pk= "your private key";
-const isValidPK = hdWallet.validatePrivateKey(pk);
+const isValidPK = utils.validatePrivateKey(pk);
 ```
 **getAccountFromPrivateKey(privateKey) : Validates the given private key and returns tron address associated with the given private key. it's an asynchronous method.**
 
@@ -165,13 +168,13 @@ const address = await getAccountFromPrivateKey(pk);
 
 **validateAddress(address) : Validates the given tron address and returns a boolean value. Supports both base58 and hex format.**
 ```js
-const isValidAddress1 = hdWallet.validateAddress("41c7cfb121ffac3fbf8c4dd48e17b055cae2ed1314");
+const isValidAddress1 = utils.validateAddress("41c7cfb121ffac3fbf8c4dd48e17b055cae2ed1314");
 console.log(isValidAddress1) //true
 
-const isValidAddress2 = hdWallet.validateAddress("TRquwhRa9Eiva1ri1D6CmtxuNv9R6PPXGD");
+const isValidAddress2 = utils.validateAddress("TRquwhRa9Eiva1ri1D6CmtxuNv9R6PPXGD");
 console.log(isValidAddress2) //true
 
-const isValidAddress3 = hdWallet.validateAddress("TRquwhRa9Eioabbabbbbqqwwwznaqwrtzxzbzbbz");
+const isValidAddress3 = utils.validateAddress("TRquwhRa9Eioabbabbbbqqwwwznaqwrtzxzbzbbz");
 console.log(isValidAddress3) //false
 ```
 
