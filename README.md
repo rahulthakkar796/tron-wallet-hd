@@ -2,17 +2,117 @@
 ##### Tron HD wallet to generate offline private keys, mnemonic seeds and addresses.
 ### Installation
 
-```shell
+```
 npm install tron-wallet-hd
 ```
+Sample recommended usage:
+
+```js
+// the seed is stored encrypted by a user-defined password
+var password = prompt('Enter password for encryption', 'password');
+
+keyStore.createVault({
+  password: password,
+  // seedPhrase: seedPhrase, // Optionally provide a 12-word seed phrase
+  // salt: fixture.salt,     // Optionally provide a salt.
+                             // A unique salt will be generated otherwise.
+  // hdPathString: hdPath    // Optional custom HD Path String
+}, function (err, ks) {
+
+  // Some methods will require providing the `pwDerivedKey`,
+  // Allowing you to only decrypt private keys on an as-needed basis.
+  // You can generate that value with this convenient method:
+  ks.keyFromPassword(password, function (err, pwDerivedKey) {
+    if (err) throw err;
+
+    // generate five new address/private key pairs
+    // the corresponding private keys are also encrypted
+    ks.generateNewAddress(pwDerivedKey, 5);
+    var addr = ks.getAddresses();
+
+    ks.passwordProvider = function (callback) {
+      var pw = prompt("Please enter password", "Password");
+      callback(null, pw);
+    };
+  });
+});
+
+```
+
+## `keystore` Function definitions
+
+These are the interface functions for the keystore object. The keystore object holds a 12-word seed according to [BIP39][] spec. From this seed you can generate addresses and private keys, and use the private keys to sign transactions.
 
 ### Usage
 
 ```js
 const hdWallet = require('tron-wallet-hd');
+const keyStore=hdWallet.keyStore;
 ```
 
 ### Methods
+### `keystore.createVault(options, callback)`
+
+This is the interface to create a new lightwallet keystore.
+
+#### Options
+
+* password: (mandatory) A string used to encrypt the vault when serialized.
+* seedPhrase: (mandatory) A twelve-word mnemonic used to generate all accounts.
+* salt: (optional) The user may supply the salt used to encrypt & decrypt the vault, otherwise a random salt will be generated.
+### `keystore.keyFromPassword(password, callback)`
+
+This instance method uses any internally-configured salt to return the appropriate `pwDerivedKey`.
+
+Takes the user's password as input and generates a symmetric key of type `Uint8Array` that is used to encrypt/decrypt the keystore.
+
+### `keystore.isDerivedKeyCorrect(pwDerivedKey)`
+
+Returns `true` if the derived key can decrypt the seed, and returns `false` otherwise.
+
+### `keystore.generateRandomSeed([extraEntropy])`
+
+Generates a string consisting of a random 12-word seed and returns it. If the optional argument string `extraEntropy` is present the random data from the Javascript RNG will be concatenated with `extraEntropy` and then hashed to produce the final seed. The string `extraEntropy` can be something like entropy from mouse movements or keyboard presses, or a string representing dice throws.
+
+### `keystore.isSeedValid(seed)`
+
+Checks if `seed` is a valid 12-word seed according to the [BIP39][] specification.
+
+### `keystore.generateNewAddress(pwDerivedKey, [num])`
+
+Allows the vault to generate additional internal address/private key pairs.
+
+The simplest usage is `ks.generateNewAddress(pwDerivedKey)`.
+
+Generates `num` new address/private key pairs (defaults to 1) in the keystore from the seed phrase, which will be returned with calls to `ks.getAddresses()`.
+
+### `keystore.deserialize(serialized_keystore)`
+
+Takes a serialized keystore string `serialized_keystore` and returns a new keystore object.
+
+### `keystore.serialize()`
+
+Serializes the current keystore object into a JSON-encoded string and returns that string.
+
+### `keystore.getAddresses()`
+
+Returns a list of hex-string addresses currently stored in the keystore.
+
+### `keystore.getSeed(pwDerivedKey)`
+
+Given the pwDerivedKey, decrypts and returns the users 12-word seed.
+
+### `keystore.exportPrivateKey(address, pwDerivedKey)`
+
+Given the derived key, decrypts and returns the private key corresponding to `address`. This should be done sparingly as the recommended practice is for the `keystore` to sign transactions using `signing.signTx`, so there is normally no need to export private keys.
+
+## `utils` Function definitions
+### Usage
+
+```js
+const hdWallet = require('tron-wallet-hd');
+const utilits=hdWallet.utils;
+```
 
 **generateMnemonic() :  Generates a string consisting of a random 12-word seed and returns it.**
 
