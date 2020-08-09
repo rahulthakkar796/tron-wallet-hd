@@ -1,6 +1,6 @@
 {
   "name": "tron-wallet-hd",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Tron HD wallet to generate offline private keys, mnemonic seeds and addresses.",
   "main": "index.js",
   "scripts": {
