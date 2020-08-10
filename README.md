@@ -163,7 +163,7 @@ const isValidPK = utils.validatePrivateKey(pk);
 
 ```js
 const pk= "your private key";
-const address = await getAccountFromPrivateKey(pk);
+const address = await utils.getAccountFromPrivateKey(pk);
 ```
 
 **validateAddress(address) : Validates the given tron address and returns a boolean value. Supports both base58 and hex format.**
