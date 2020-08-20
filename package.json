@@ -11,7 +11,7 @@
   "dependencies": {
     "@tronscan/client": "^0.2.48",
     "aes-js": "^3.1.2",
-    "bcrypt": "^4.0.1",
+    "bcrypt": "^5.0.0",
     "bip32": "^1.0.2",
     "bip39": "^2.5.0",
     "bitcore-lib": "8.1.1",
