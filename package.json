@@ -19,7 +19,7 @@
     "core-js": "^3.4.3",
     "crypto": "^1.0.1",
     "crypto-js": "^4.0.0",
-    "elliptic": "6.4.1",
+    "elliptic": "6.5.4",
     "ethereumjs-util": "^7.0.4",
     "pbkdf2": "^3.0.17",
     "rlp": "2.2.3",
